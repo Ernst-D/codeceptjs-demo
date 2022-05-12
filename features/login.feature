@@ -1,3 +1,4 @@
+# WARN: set locale in browser.newContext([options])
 Feature: User authentication
 
   Scenario: User logs in with existing creds
