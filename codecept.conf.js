@@ -14,11 +14,18 @@ exports.config = {
     Playwright: {
       url: 'http://localhost',
       show: true,
-      browser: 'chromium'
+      browser: 'chromium',
+      /**
+       * @see https://playwright.dev/docs/api/class-browsertype#browser-type-launch 
+       * basically, when you use browserType as a key here - values will be options for this method
+       */
+      // chromium:{
+      //   channel:"msedge"
+      // },
+      // webkit:{
+      //   slowMo:3000
+      // }
     }
-  },
-  include: {
-    I: './steps_file.js'
   },
   bootstrap: null,
   mocha: {},
