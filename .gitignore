@@ -131,3 +131,5 @@ dist
 
 # codecept artifacts
 artifacts
+#pw artifacts
+codegen.js
