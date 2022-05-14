@@ -9,6 +9,10 @@ class LoginPage extends BasePage {
         super(page);
     }
 
+    get SignUpToogle(){
+        return this._page.locator('label:has-text("Sign up")');
+    }
+
     get SigninBtn(){
         return this._page.locator('[type="submit"]');
     }
