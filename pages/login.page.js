@@ -1,21 +1,23 @@
-class LoginPage {
+const BasePage = require("./base.page");
+
+class LoginPage extends BasePage {
     /**
      * 
      * @param {import("playwright").Page} page 
      */
     constructor(page){
-        this._page = page;
+        super(page);
     }
 
-    get signinBtn(){
+    get SigninBtn(){
         return this._page.locator('[type="submit"]');
     }
 
-    get emailField(){
+    get EmailField(){
         return this._page.locator('[name="forms.login.login"]');
     }
 
-    get passwordField(){
+    get PasswordField(){
         return this._page.locator('[name="forms.login.password"]');
     }
 }
