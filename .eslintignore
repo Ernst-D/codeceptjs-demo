@@ -1,0 +1,10 @@
+node_modules
+*.json
+*.mp4
+*.png
+*.html
+*.csv
+*.xlsx
+*.md
+*.pdf
+*.txt

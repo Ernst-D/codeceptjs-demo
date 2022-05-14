@@ -16,10 +16,14 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@babel/eslint-parser": "^7.17.0",
         "@codeceptjs/configure": "^0.8.0",
         "@codeceptjs/examples": "^1.2.1",
         "@codeceptjs/ui": "^0.4.6",
         "codeceptjs": "^3.3.3",
+        "eslint": "^8.15.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.26.0",
         "playwright": "^1.21.1"
     }
 }

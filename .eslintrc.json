@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "prefer-const":"off",
+        "no-console":"error",
+        "semi":"error",
+        "lines-between-class-members":["warn","always"],
+        "array-callback-return":"warn",
+        "func-call-spacing":["warn","never"],
+        "require-await":"error",
+        "arrow-spacing": ["warn", { "before": true, "after": true }],
+        "array-bracket-spacing":["warn", "always"],
+        "object-curly-spacing":["warn", "always"],
+        "comma-spacing":["warn", { "before": false, "after": true }]
+      }
+}
