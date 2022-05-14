@@ -14,14 +14,15 @@ class LoginFixture extends TestFixture {
     
     async setup(){
         let _context = await this.setupContext(
-            _loginContextOptions
+            this.contextOptions
         );
-        let _page = await _context.newPage();
+        this._page = await _context.newPage();
     
-        let loginPage = new LoginPage(_page);
-        let dashboardPage = new DashboardPage(_page);
+        let loginPage = new LoginPage(this._page);
+        let dashboardPage = new DashboardPage(this._page);
 
         return {
+            _context,
             loginPage, dashboardPage
         };
     }
