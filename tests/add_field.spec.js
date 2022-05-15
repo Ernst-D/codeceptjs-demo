@@ -8,9 +8,13 @@ Scenario('User adds field from map', ({ I }) => {
     let fixture = new AddFieldFixture(browser);
     let { dashboardPage, dashboardActions } = await fixture.setup();
 
+    await dashboardPage._page.pause();
+
     await dashboardActions.addField({ crop:"barley" });
-    assert.equal(await dashboardActions.isFieldIsHighlightedOnMap(), true);
-    assert.equal(await dashboardActions.isFieldAddedToDashboard(), true);
+    let isFieldIsHighlightedOnMap = await dashboardActions.isFieldIsHighlightedOnMap();
+    let isFieldAddedToDashboard =  await dashboardActions.isFieldAddedToDashboard();
+    assert.equal(isFieldIsHighlightedOnMap, true);
+    assert.equal(isFieldAddedToDashboard, true);
 
     await fixture.cleanup();
   

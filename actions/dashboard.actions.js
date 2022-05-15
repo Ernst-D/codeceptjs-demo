@@ -1,3 +1,4 @@
+const assert = require("assert");
 const DashboardPage = require("../pages/dashboard.page");
 const shared = require("../utils/shared");
 
@@ -43,6 +44,7 @@ class DashboardActions{
         shared.set("field_user_season_id", resBody.rows[0].field_user_season_id);
         shared.set("id", resBody.rows[0].id);
         await this._pageObject.MapHighlightedField.waitFor({ state:"visible", timeout:60000 });
+        await this._page.waitForLoadState("networkidle", { timeout:10000 });
     }
 
     async isFieldAddedToDashboard(){
@@ -50,7 +52,7 @@ class DashboardActions{
     }
 
     async isFieldIsHighlightedOnMap(){
-        await this._page.waitForLoadState("networkidle", { timeout:10000 });
+        // await this._page.waitForLoadState("networkidle", { timeout:10000 });
         let isVisible = await this._pageObject.MapHighlightedField.isVisible();
         return isVisible;
     }
@@ -63,7 +65,12 @@ class DashboardActions{
             this._pageObject.SideDeleteFieldBtn.nth(0).click(),
             this._page.waitForResponse(response => response.url().endsWith(`/fields/${shared.get("id")}`))
         ]);
-        await this._pageObject.NotificationBar.waitFor({ state:"detached" });
+    }
+
+    async checkNotificationBarDisplayed(){
+        assert.equal(await this._pageObject.NotificationBar.isVisible(), true);
+        return await this._pageObject.NotificationBar.waitFor({ state:"detached" });
+
     }
 
 }
