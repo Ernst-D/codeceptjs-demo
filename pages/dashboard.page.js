@@ -64,5 +64,9 @@ class DashboardPage extends BasePage {
         return this._page.locator('div[role="listbox"] div:has-text("Delete")');
     }
 
+    get NotificationBar(){
+        return this._page.locator('[class="main-container-notification-actions"] ');
+    }
+
 }
 module.exports = DashboardPage;
