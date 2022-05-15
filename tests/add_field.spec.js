@@ -1,3 +1,4 @@
+const assert = require("assert");
 const AddFieldFixture = require("../fixtures/add_field.fixture");
 
 Feature('Field selection');
@@ -8,10 +9,11 @@ Scenario('User adds field from map', ({ I }) => {
     let { dashboardPage, dashboardActions } = await fixture.setup();
 
     await dashboardActions.addField({ crop:"barley" });
-    // todo below
-    // await dashboardActions.checkFieldAddedToDashboard();
-    // await dashboardActions.checkFieldIsHighlightedOnMap();
+    assert.equal(await dashboardActions.isFieldIsHighlightedOnMap(), true);
+    assert.equal(await dashboardActions.isFieldAddedToDashboard(), true);
+
+    await fixture.cleanup();
   
-  await dashboardPage._page.pause();
+    await dashboardPage._page.pause();
   });
 });

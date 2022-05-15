@@ -1,3 +1,4 @@
+const assert = require("assert");
 const DashboardPage = require("../pages/dashboard.page");
 
 class DashboardActions{
@@ -36,6 +37,15 @@ class DashboardActions{
         await this._pageObject.getSuggestedCrop(fieldParams.crop).click();
         await this._pageObject.SaveBtn.click();
         await this._pageObject.MapHighlightedField.waitFor({ state:"visible", timeout:60000 });                
+    }
+
+    async isFieldAddedToDashboard(){
+        return await this._pageObject.SideSelectedFields.nth(0).isVisible();
+    }
+
+    async isFieldIsHighlightedOnMap(){
+        let isVisible = await this._pageObject.MapHighlightedField.isVisible();
+        return isVisible;
     }
 
     async deleteField(){
