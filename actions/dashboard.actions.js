@@ -6,7 +6,21 @@ class DashboardActions{
      * @param {DashboardPage} dashboardPage 
      */
     constructor(dashboardPage){
-        this._pageObj = dashboardPage;
+        this._pageObject = dashboardPage;
+        this._page = dashboardPage._page;
+    }
+
+    /**
+     * 
+     * @param {number} isRandom 
+     */
+    async selectFieldFromMap(random = null){
+        let availableFields = this._pageObject.MapAvailableFields;
+        let randomField = Math.floor(Math.random() * await availableFields.count());
+        
+        random == null 
+        ? await availableFields.nth(randomField).click({ force:true })
+        : await availableFields.nth(random).click({ force:true });
     }
 
     async addField(fieldParams){
@@ -14,27 +28,21 @@ class DashboardActions{
          * fieldParams.crop = "barley"
          */
 
-        let { _page } = this._pageObj;
-        await _page.locator('text=Select on map').click();
-        await _page.pause();
-        let availableFields = _page.locator('[class="leaflet-interactive"]:not([d*="M0 0"])');
+        await this._pageObject.SideSelectOnMapBtn.click();
+        await this.selectFieldFromMap();
 
-        await availableFields.nth(
-            Math.floor(Math.random() * await availableFields.count()))
-        .click({ force:true });
+        await this._pageObject.CropMenu.click();
+        await this._pageObject.CropMenuInput.fill(fieldParams.crop);
+        await this._pageObject.getSuggestedCrop(fieldParams.crop).click();
+        await this._pageObject.SaveBtn.click();
+        await this._pageObject.MapHighlightedField.waitFor({ state:"visible", timeout:60000 });                
+    }
 
-        await _page.locator('[aria-label="open menu"]').click();
-        await _page.locator('#downshift-1-input').fill(fieldParams.crop);
-        await _page.locator('div[role="listbox"] div:has-text("Barley, spring")').click();
-        await _page.locator('text=Save').click();
-        await _page.pause();
-        await _page.locator('[class="soil-fields-list__list-item"]').first().waitFor({ state:"visible" });
-
-        await _page.locator('[class="leaflet-interactive"][fill="transparent"]')
-        .waitFor({ state:"visible", timeout:60000 });
-        await _page.locator('[aria-label="grid"] [aria-label="open menu"]').hover({ force:true });
-        await _page.locator('[aria-label="grid"] [aria-label="open menu"]').click();
-        await _page.locator('div[role="listbox"] div:has-text("Delete")').click();
+    async deleteField(){
+        await this._pageObject.SideSelectedFields.nth(0).waitFor({ state:"visible" });
+        await this._pageObject.SideFieldActions.nth(0).hover({ force:true });
+        await this._pageObject.SideFieldActions.nth(0).click();
+        await this._pageObject.SideDeleteFieldBtn.nth(0).click();
     }
 
 }
