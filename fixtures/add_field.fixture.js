@@ -15,14 +15,16 @@ class AddFieldFixture extends TestFixture {
         await dashboardPage._page.goto("https://app.onesoil.ai/@49.2302,17.6492,16z/fields");
         await dashboardPage.MainContainer.waitFor({ state:"visible" });
         let dashboardActions = new DashboardActions(dashboardPage);
-        
-        return {
+
+        this._setup = {
             dashboardPage, dashboardActions
         };
+        
+        return this._setup;
     }
 
     async cleanup(){
-
+        await this._setup.dashboardActions.deleteField(); 
     }
 }
 module.exports = AddFieldFixture;
