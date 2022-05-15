@@ -1,4 +1,5 @@
 const DeleteFieldFixture = require("../fixtures/delete_field.fixture");
+const assert = require("assert");
 
 Feature('Field removal');
 
@@ -10,7 +11,10 @@ Scenario('User delete exisiting field', ({ I }) => {
     await dashboardPage._page.pause();
 
     await dashboardActions.deleteField();
-  
+    await dashboardActions.checkNotificationBarDisplayed();
+    let selectedFields = await dashboardPage.SideSelectedFields.count();
+    assert.equal(selectedFields, 0);
+
     await dashboardPage._page.pause();
   });
 });
