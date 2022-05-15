@@ -12,7 +12,9 @@ class TestFixture {
      * @returns {Promise<import("playwright").BrowserContext>}
      */
     async setupContext(options){
-      return await this._browser.newContext(options);
+      let _context = await this._browser.newContext(options);
+      _context.setDefaultNavigationTimeout(60000);
+      return _context;
     }
 }
 module.exports = TestFixture;
