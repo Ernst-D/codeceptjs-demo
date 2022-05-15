@@ -1,5 +1,5 @@
-const assert = require("assert");
 const DashboardPage = require("../pages/dashboard.page");
+const shared = require("../utils/shared");
 
 class DashboardActions{
     /**
@@ -35,8 +35,14 @@ class DashboardActions{
         await this._pageObject.CropMenu.click();
         await this._pageObject.CropMenuInput.fill(fieldParams.crop);
         await this._pageObject.getSuggestedCrop(fieldParams.crop).click();
-        await this._pageObject.SaveBtn.click();
-        await this._pageObject.MapHighlightedField.waitFor({ state:"visible", timeout:60000 });                
+        const [ response ] = await Promise.all([
+            this._page.waitForResponse(response => response.url().endsWith("/fields") && response.status() == 200),
+            this._pageObject.SaveBtn.click(),
+        ]);
+        let resBody = (await response.json()).data;
+        shared.set("field_user_season_id", resBody.rows[0].field_user_season_id);
+        shared.set("id", resBody.rows[0].id);
+        await this._pageObject.MapHighlightedField.waitFor({ state:"visible", timeout:60000 });
     }
 
     async isFieldAddedToDashboard(){
@@ -44,6 +50,7 @@ class DashboardActions{
     }
 
     async isFieldIsHighlightedOnMap(){
+        await this._page.waitForLoadState("networkidle", { timeout:10000 });
         let isVisible = await this._pageObject.MapHighlightedField.isVisible();
         return isVisible;
     }
@@ -52,7 +59,11 @@ class DashboardActions{
         await this._pageObject.SideSelectedFields.nth(0).waitFor({ state:"visible" });
         await this._pageObject.SideFieldActions.nth(0).hover({ force:true });
         await this._pageObject.SideFieldActions.nth(0).click();
-        await this._pageObject.SideDeleteFieldBtn.nth(0).click();
+        await Promise.all([
+            this._pageObject.SideDeleteFieldBtn.nth(0).click(),
+            this._page.waitForResponse(response => response.url().endsWith(`/fields/${shared.get("id")}`))
+        ]);
+        await this._pageObject.NotificationBar.waitFor({ state:"detached" });
     }
 
 }
