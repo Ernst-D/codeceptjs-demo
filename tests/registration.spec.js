@@ -1,8 +1,8 @@
 const RegistrationFixture = require("../fixtures/registration.fixture");
 
-Feature('User authentication');
+Feature('User registration');
 
-Scenario('User logs in with existing creds', ({ I }) => {
+Scenario('User creates account using test email', ({ I }) => {
   I.usePlaywrightTo('work with PW API', async ({ browser }) => {
     let fixture = new RegistrationFixture(browser);
     let { loginPage, tempEmail, dashboardPage } = await fixture.setup();
