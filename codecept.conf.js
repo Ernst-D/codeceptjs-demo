@@ -8,7 +8,7 @@ setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
 
 exports.config = {
-  tests: 'tests/*.test.js',
+  tests: 'tests/*.spec.js',
   output: 'artifacts',
   helpers: {
     Playwright: {
@@ -28,6 +28,10 @@ exports.config = {
     }
   },
   bootstrap: null,
-  mocha: {},
+  mocha: {
+    reporterOptions: {
+      reportDir: "./artifacts/mochaReport"
+    }
+  },
   name: 'test-task-codecept'
-}
+};
