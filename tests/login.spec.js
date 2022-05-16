@@ -1,4 +1,5 @@
 const LoginFixture = require("../fixtures/login.fixture");
+const assert = require("assert");
 
 Feature('User authentication');
 
@@ -14,7 +15,7 @@ Scenario('User logs in with existing creds', ({ I }) => {
     await loginPage.PasswordField.fill('testTask132');
     await loginPage.SigninBtn.click();
     await dashboardPage.MainContainer.waitFor({ state:"visible" });
-    
+    assert.equal(true, false);
     await dashboardPage._page.pause();
   });
 });
