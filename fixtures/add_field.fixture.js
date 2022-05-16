@@ -25,6 +25,7 @@ class AddFieldFixture extends TestFixture {
 
     async cleanup(){
         await this._setup.dashboardActions.deleteField(); 
+        await this._setup.dashboardActions.checkNotificationBarDisplayed(); 
     }
 }
 module.exports = AddFieldFixture;
