@@ -3,7 +3,8 @@
 Feature: Localization
 
  # Manage locale with browser.newContext([options]) when creating new context in PW
-  Scenario Outline: User delete exisiting field
+ # TODO: use either localStorage + reload for such manipulations, or requests from page
+  Scenario Outline: User switches between different locales
     Given User's browser has <locale>
     When user navigates to login page 
     And User logs in
