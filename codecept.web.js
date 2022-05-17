@@ -25,20 +25,6 @@ exports.config = {
       // webkit:{
       //   slowMo:3000
       // }
-    },
-    Appium: {
-      app: "./utils/dev-app.apk",
-      platform: "Android",
-      host:"localhost",
-      port:4723,
-      desiredCapabilities: {
-          "platformName": "Android",
-          "deviceName": "Pixel_4a",
-          "platformVersion": "11.0",
-          "automationName": "UiAutomator2",
-          // "appium:app": "C:\\Users\\ernst\\dev-app.apk",
-          "autoGrantPermissions": true
-      }
     }
   },
   bootstrap: null,
