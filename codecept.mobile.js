@@ -10,6 +10,7 @@ setCommonPlugins();
 exports.config = {
   tests: 'tests/mobile/*.spec.js',
   output: 'artifacts',
+  timeout:process.env._DEBUG == "1" ? 6000 : 600,
   helpers: {
     Appium: {
       app: "./utils/dev-app.apk",

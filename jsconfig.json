@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "types": ["codeceptjs", "playwright"]
+    "types": ["codeceptjs", "playwright", "webdriverio/async"]
   }
 }
