@@ -1,3 +1,4 @@
+const LoginScreen = require("../pages/mobile/login.screen");
 const WelcomeScreen = require("../pages/mobile/welcome.screen");
 
 class MobileFixture{
@@ -9,11 +10,11 @@ class MobileFixture{
     }
     
     setup(){
-
         let welcomeScreen = new WelcomeScreen(this._driver);
+        let loginScreen = new LoginScreen(this._driver);
 
         return {
-            welcomeScreen
+            welcomeScreen, loginScreen
         };
     }
 }
