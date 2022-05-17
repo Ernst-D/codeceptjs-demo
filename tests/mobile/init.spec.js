@@ -22,8 +22,7 @@ Scenario('Mobile test', ({ I }) => {
         
         await (await driver.$$('android.widget.EditText')).pop().click();
         await (await driver.$$('android.widget.EditText')).pop().pressKeyCode(66);
-
-
-        await driver.pause(1000);
+        waitForDisplayed(await elem(textViewSelector("NEXT")));
+        await (await elem(textViewSelector("NEXT"))).click();
      });
 });
